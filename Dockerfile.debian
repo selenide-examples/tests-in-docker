@@ -1,0 +1,27 @@
+# Use the official Debian image as a base image
+FROM debian:12-slim
+
+# Install dependencies for Chrome and ChromeDriver
+RUN apt update
+RUN apt install -y binutils chromium chromium-driver
+RUN apt install -y default-jdk
+
+RUN chromium -version # 134.0.6998.35
+RUN chromedriver -version # 134.0.6998.35
+RUN java -version
+
+WORKDIR /app
+COPY gradlew* /app/
+COPY gradle /app/gradle
+RUN ls -las /app
+RUN /app/gradlew --no-daemon -v
+
+COPY build.gradle /app/
+RUN /app/gradlew downloadDependencies --no-daemon
+
+COPY . .
+
+# keep the container running
+CMD ["tail", "-f", "/dev/null"]
+
+# size: 1.3GB

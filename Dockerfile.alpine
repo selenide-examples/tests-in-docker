@@ -1,0 +1,27 @@
+# Use the official Alpine image as a base image
+FROM alpine:3.21
+
+# Install dependencies and Chrome
+RUN apk update
+RUN apk add chromium chromium-chromedriver
+RUN apk add openjdk21-jdk
+
+RUN chromium -version # 133.0.6943.141
+RUN chromedriver -version # 133.0.6943.141
+RUN java -version # "17.0.14"
+
+WORKDIR /app
+COPY gradlew* /app/
+COPY gradle /app/gradle
+RUN ls -las /app
+RUN /app/gradlew --no-daemon -v
+
+COPY build.gradle /app/
+RUN /app/gradlew downloadDependencies --no-daemon
+
+COPY . .
+
+# keep the container running
+CMD ["tail", "-f", "/dev/null"]
+
+# size: 985M

@@ -1,0 +1,8 @@
+.git
+.gitignore
+.gradle
+.idea
+build
+out
+./run-tests.sh
+Dockerfile*
