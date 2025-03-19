@@ -1,9 +1,16 @@
 # Run Chrome tests in different containers 
 
+This project shows an easy way to run web tests where browser is running _locally_ (without TestContainers, Selenoid, Moon and other clouds).
+The browser is running on the same machine where tests are running. 
+It's the easiest and fastest way to run web tests.
+
 ### How to run
 
-* `./gradlew test-alpine`
-* `./gradlew test-debian`
+* `./gradlew test`  - just runs tests locally
+* `./gradlew test-alpine` - runs both tests and browser inside a container (Alpine-based)
+* `./gradlew test-debian` - runs both tests and browser inside a container (Debian-based)
+
+NB! All of these commands generate test report in `build/reports` folder (as it's common in Gradle projects).
 
 ### Container size
 
