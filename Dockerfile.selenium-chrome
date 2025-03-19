@@ -1,0 +1,24 @@
+FROM selenium/standalone-chrome:dev
+#FROM seleniarm/standalone-chromium  # on MacOS
+
+RUN sudo apt update
+#RUN sudo apt install -y binutils chromium chromium-driver
+RUN sudo apt install -y default-jdk
+
+RUN chromium -version
+RUN chromedriver -version
+RUN ls -las /usr/lib/jvm
+RUN cat /etc/os-release
+RUN javac -version
+RUN java -version
+
+WORKDIR /app
+COPY gradlew* /app/
+COPY gradle /app/gradle
+RUN ls -las /app
+RUN /app/gradlew --no-daemon -v
+
+COPY . .
+
+# keep the container running
+CMD ["tail", "-f", "/dev/null"]

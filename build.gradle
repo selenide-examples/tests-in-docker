@@ -54,3 +54,13 @@ tasks.register('test-debian', Exec) {
         return standardOutput.toString()
     }
 }
+
+tasks.register('selenium-chrome', Exec) {
+    executable "./run-tests.sh"
+    args "selenium-chrome"
+
+    standardOutput = new ByteArrayOutputStream()
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
