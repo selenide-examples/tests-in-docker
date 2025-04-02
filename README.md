@@ -16,7 +16,7 @@ NB! All of these commands generate test report in `build/reports` folder (as it'
 ### Container size
 
 One of the goals was to compare sizes of different docker containers.
-On my machine, both images are similar in size (while Alpine image is a big smaller than Debian):
+On my machine, both images are similar in size (while Alpine image is a bit smaller than Debian):
 
 * `chrome-java-debian`: 1.67 GB
 * `chrome-java-alpine`: 1.34 GB
